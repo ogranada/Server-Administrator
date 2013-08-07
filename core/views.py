@@ -7,13 +7,21 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as dj_login
 from django.contrib.auth import logout as dj_logout
 
+from core.models import *
+
+## TEMPLATE_CONTEXT_PROCESSORS
+
+def menus(request):
+    return {'menus': Applications.objects.all()}
+
+def getuser(request):
+    print "===>",request
+    return {'user': request.user}
+
+## END TEMPLATE_CONTEXT_PROCESSORS
 
 def index(request):
     c = {}
-    if hasattr(request, 'user'):
-        print(request.user)
-    else:
-        print("No hay usuario")
     c["user"] = request.user
     return render_to_response("inicio.html", c)
 
@@ -44,5 +52,5 @@ def login(request):
 def logout(request):
     c = {}
     dj_logout(request)
-    c["user"] = request.user
+    # c["user"] = request.user
     return redirect("/", c)
