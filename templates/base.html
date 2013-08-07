@@ -30,30 +30,23 @@
             <a class="brand" href="/">Server Administrator</a>
             <ul class="nav">
               <li><a href="{% url 'home' %}" class="">Home</a></li>
-              {% if user.is_authenticated %}
-                {% block menu%}
+      {% if user.is_authenticated %}
+        {% for app in menus %}
+            {% if app.menuitems_set.all|length > 0 %}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PostgreSQL<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.name }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'postgres.views.backup' %}">Make BackUp</a></li>
-                        <!--<li><a href="{#% url 'demo_app.views.demo_form'
-                          %#}?layout=horizontal">Horizontal</a></li>-->
-                        <!-- <li><a href="{#% url
-                          'demo_app.views.demo_form_inline'
-                          %#}?layout=inline">Inline</a></li>-->
-                        <!--<li><a href="{#% url
-                          'demo_app.views.demo_form_inline'
-                          %#}?layout=search">Search</a></li>-->
-                        <!--<li><a href="{#% url
-                          'demo_app.views.demo_form_with_template'
-                          %#}?layout=horizontal">Using template</a></li>-->
+                    {% for menuitem in app.menuitems_set.all %}
+                        <li><a href="{% url menuitem.app_path %}">{{ menuitem }}</a></li>
+                    {% endfor %}
                     </ul>
                 </li>
-                {% endblock %}
-                <li><a href="{% url 'inicio.views.logout' %}">Logout</a></li>
+            {% endif %}
+        {% endfor %}
+                <li><a href="{% url 'core.views.logout' %}">Logout</a></li>
               {% else %}
-                <li><a href="{% url 'inicio.views.login' %}">Login</a></li>
-              {% endif %}
+                <li><a href="{% url 'core.views.login' %}">Login</a></li>
+      {% endif %}
             </ul>
         </div>
     </div>

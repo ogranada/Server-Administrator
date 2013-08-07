@@ -9,9 +9,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'serverAdmin.views.home', name='home'),
     #url(r'^serverAdmin/', include('serverAdmin.foo.urls')),
 
-    url(r'^$', 'inicio.views.index', name='home'),
-    url(r'^login/$', 'inicio.views.login', name='login'),
-    url(r'^logout/$', 'inicio.views.logout', name='logout'),
+    url(r'^$', 'core.views.index', name='home'),
+    url(r'^login/$', 'core.views.login', name='login'),
+    url(r'^logout/$', 'core.views.logout', name='logout'),
     #################
     url(r'^pgbackup/$', 'postgres.views.backup', name='login'),
 
