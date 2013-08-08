@@ -1,22 +1,41 @@
 
 
 {% extends "base.html" %}
-
+{% block extra_head %}
+        <script>
+          function loadBackUp(){
+            var bckpid = $('#recoverbackup').val();
+              $.ajax('/pgbackup/recover/'+bckpid, {
+                  type: 'get',
+                  dataType: 'json',
+                  success: function (res) {
+                      if (res.error) {
+                          alert("Error en la peticion " + res.error);
+                          return;
+                      }
+                      console.log(res.response);
+                    }
+                });
+              }
+        </script>
+{% endblock %}
 {% block content %}
 
 <div class="row">
   <div class="span5">
-        <form action="/pgbackup/" method="post">{% csrf_token %}
+    <!--
+    <form action="/pgbackup/" method="post">{% csrf_token %}-->
       		<h4>My Backups</h4>
             <label for="backups_id">Backup:</label>
-      		<select name="backups_id">
+      		<select id="recoverbackup" name="recoverbackup">
       			{% for back in user.backup_set.all %}
     		  	<option value="{{ back.id }}">{{ back }}</option>
     		  	{% endfor %}
     		</select>
             <br/>
-            <input type="submit" value="Restore" name="button" />
-        </form>
+            <input type="submit" value="Restore" name="button" onclick="loadBackUp()" />
+        <!--
+          </form>-->
   </div>
   <div class="span5">
     {% if state and state != "Saved" %}
@@ -31,7 +50,7 @@
     </div>
     {% endif %}
   		<h4>Create Backup</h4>
-        <form action="/pgbackup/" method="post">{% csrf_token %}
+        <form action="/pgbackup" method="post">{% csrf_token %}
             {{ backupForm.as_p }}
             <input type="submit" value="Save" name="button" />
         </form>

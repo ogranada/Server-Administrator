@@ -6,7 +6,7 @@
 {{ state }}
     <form action="{% url 'core.views.login' %}" method="post">
             {% if next %}
-             <input type="hidden" name="next" value="{{ next }}" />
+            <input type="hidden" name="next" value="{{ next }}" />
              {% endif %}
              {% csrf_token %}
             username:
