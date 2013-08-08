@@ -27,18 +27,22 @@ def index(request):
 
 def login(request):
     c = {}
+    if 'next' in request.GET.keys():
+        c["next"] = request.GET["next"]
     c.update(csrf(request))
     state = ""
     if request.POST:
         # print(dir(request.POST))
         usernm = request.POST['username']
         passwd = request.POST['password']
+        next = request.POST.get('next','')
+        next = next if next != '' else '/'
         user = authenticate(username=usernm, password=passwd)
         if user is not None:
             if user.is_active:
                 dj_login(request, user)
                 state = "You're successfully logged in!"
-                return redirect("/")
+                return redirect(next)
             else:
                 state = "Your account is not active, please contact the site admin."
         else:
