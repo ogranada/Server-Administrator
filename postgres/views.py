@@ -4,13 +4,18 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.template import RequestContext
 from django.core.context_processors import csrf
+from django.contrib.auth.decorators import login_required
+
+
 
 from postgres.forms import *
 from postgres.models import *
 
+@login_required
 def index(request):
     return render_to_response('postgres/index.html', context_instance=RequestContext(request))
 
+@login_required
 def backup(request):
     c = {}
     c.update(csrf(request))

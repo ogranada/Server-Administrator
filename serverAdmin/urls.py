@@ -10,10 +10,10 @@ urlpatterns = patterns('',
     #url(r'^serverAdmin/', include('serverAdmin.foo.urls')),
 
     url(r'^$', 'core.views.index', name='home'),
-    url(r'^login/$', 'core.views.login', name='login'),
-    url(r'^logout/$', 'core.views.logout', name='logout'),
+    url(r'^accounts/login/$', 'core.views.login', name='login'),
+    url(r'^accounts/logout/$', 'core.views.logout', name='logout'),
     #################
-    url(r'^pgbackup/$', 'postgres.views.backup', name='login'),
+    url(r'^pgbackup/$', 'postgres.views.backup', name='PostgreSQL Backup'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
