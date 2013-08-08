@@ -2,5 +2,41 @@
 
 {% extends "base.html" %}
 
-... :D
+{% block content %}
+
+<div class="row">
+  <div class="span5">
+        <form action="/pgbackup/" method="post">{% csrf_token %}
+      		<h4>My Backups</h4>
+            <label for="backups_id">Backup:</label>
+      		<select name="backups_id">
+      			{% for back in user.backup_set.all %}
+    		  	<option value="{{ back.id }}">{{ back }}</option>
+    		  	{% endfor %}
+    		</select>
+            <br/>
+            <input type="submit" value="Restore" name="button" />
+        </form>
+  </div>
+  <div class="span5">
+    {% if state and state != "Saved" %}
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ state }}
+    </div>
+    {% elif state == "Saved" %}
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ state }}
+    </div>
+    {% endif %}
+  		<h4>Create Backup</h4>
+        <form action="/pgbackup/" method="post">{% csrf_token %}
+            {{ backupForm.as_p }}
+            <input type="submit" value="Save" name="button" />
+        </form>
+  </div>
+</div>
+
+{% endblock %}
 

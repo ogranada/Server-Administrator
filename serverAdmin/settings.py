@@ -127,8 +127,8 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
                                 "django.core.context_processors.i18n",
                                 "django.core.context_processors.media",
                                 "django.contrib.messages.context_processors.messages",
+                                "core.views.getuser",
                                 "core.views.menus",
-                                "core.views.getuser"
                                 )
 
 
@@ -146,7 +146,8 @@ INSTALLED_APPS = (
      #################################
     'bootstrap_toolkit',
      #################################
-    'core'
+    'core',
+    'postgres'
 )
 
 # A sample logging configuration. The only tangible logging

@@ -2,6 +2,7 @@
 
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
+from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as dj_login
@@ -15,15 +16,13 @@ def menus(request):
     return {'menus': Applications.objects.all()}
 
 def getuser(request):
-    print "===>",request
     return {'user': request.user}
 
 ## END TEMPLATE_CONTEXT_PROCESSORS
 
 def index(request):
     c = {}
-    c["user"] = request.user
-    return render_to_response("inicio.html", c)
+    return render_to_response("inicio.html", c, context_instance=RequestContext(request))
 
 
 def login(request):
@@ -45,8 +44,7 @@ def login(request):
         else:
             state = "Your username and/or password were incorrect."
     c["state"] = state
-    c["user"] = request.user
-    return render_to_response("login.html", c)
+    return render_to_response("login.html", c, context_instance=RequestContext(request))
 
 
 def logout(request):
