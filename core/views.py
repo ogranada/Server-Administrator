@@ -13,7 +13,7 @@ from core.models import *
 ## TEMPLATE_CONTEXT_PROCESSORS
 
 def menus(request):
-    return {'menus': Applications.objects.all()}
+    return {'menus': Application.objects.all()}
 
 def getuser(request):
     return {'user': request.user}
