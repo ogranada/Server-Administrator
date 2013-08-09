@@ -38,12 +38,12 @@
           </form>-->
   </div>
   <div class="span5">
-    {% if state and state != "Saved" %}
+    {% if opresult and opresult == "err" %}
     <div class="alert alert-error">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{ state }}
     </div>
-    {% elif state == "Saved" %}
+    {% elif opresult == "ok" %}
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{ state }}

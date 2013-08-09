@@ -7,7 +7,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
 from core.utils import ajax_view
-
+from pg_utils import run_pgDump
 
 from postgres.forms import *
 from postgres.models import *
@@ -20,6 +20,7 @@ def index(request):
 def backup(request):
     c = {}
     c.update(csrf(request))
+    c['opresult'] = ''
     state = ""
     c["backupForm"] = BackupForm()
     if request.POST:
@@ -28,11 +29,25 @@ def backup(request):
             if form.is_valid():
                 bkp = Backup()
                 bkp.description = form.cleaned_data['description']
+                bkp.database = form.cleaned_data['database']
                 bkp.user_id = request.user.id
                 bkp.save()
-                state = "Saved"
+                try:
+                    filename = str(bkp.date).replace(' ', '_').replace(":", '').split('.')[0] + '.dump'
+                    # outfile, hostname, db, user, passwd
+                    success, msj = run_pgDump(filename, bkp.database.server.host, bkp.database.name, bkp.database.username, bkp.database.password)
+                    if success:
+                        state = filename + " Saved"
+                        c['opresult'] = 'ok'
+                    else:
+                        state = "Error: " + msj
+                        c['opresult'] = 'err'
+                except Exception as w:
+                    state = "Error(" + str(type(w)) + "): " + str(w)
+                    c['opresult'] = 'err'
             else:
-                state = str(form.errors) # "Invalid Data"
+                c['opresult'] = 'err'
+                state = str(form.errors)  # "Invalid Data"
         elif request.POST["button"].lower() == "restore":
             print "restoring", Backup.objects.filter(id=request.POST["backups_id"])[0]
     c["state"] = state
@@ -40,13 +55,16 @@ def backup(request):
 
 @login_required
 @ajax_view
-def restore_backup(request,num=-1):
+def restore_backup(request, num=-1):
     # from time import sleep
     # sleep(3)
     if num != -1:
-        return {"user":request.user.username}
+        try:
+            return {"response": "Done"}
+        except Exception as w:
+            return {"response": 'Error (' + type(w) + '):'+str(w)}
     else:
-        return {"error":'incorrect value'}
+        return {"response": 'incorrect value'}
 
 
 
