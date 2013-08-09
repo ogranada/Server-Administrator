@@ -1,0 +1,13 @@
+
+# compiled source #
+###################
+
+*.pyc
+*.pyo
+
+# editor files #
+################
+
+*.swp
+
+

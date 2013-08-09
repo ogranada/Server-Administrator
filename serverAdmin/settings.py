@@ -8,15 +8,16 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 import os
-
 BASEPATH = os.sep.join(os.path.abspath( __file__ ).split(os.sep)[0:-2] )
+DATE_FORMAT = '%Y-%m-%d'
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+# FIXTURE_DIRS = (BASEPATH + os.sep + "fixtures",)
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'serverAdmin.db',                      # Or path to database file if using sqlite3.
+        'NAME': '../db_serverAdmin.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -180,3 +181,4 @@ LOGGING = {
         },
     }
 }
+
