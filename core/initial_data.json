@@ -1,0 +1,21 @@
+[
+    {
+      "pk": 1, 
+      "model": "core.application", 
+      "fields": {
+        "name": "Administration", 
+        "description": "Administration Tools",
+        "position":"0"
+      }
+    },
+    {
+      "pk": 1, 
+      "model": "core.menuitem", 
+      "fields": {
+        "app_path": "core.views.servermanager", 
+        "application": 1, 
+        "name": "Server Manager", 
+        "description": "Server manager tools"
+      }
+    }
+]

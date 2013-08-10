@@ -9,14 +9,19 @@ from django.contrib.auth import login as dj_login
 from django.contrib.auth import logout as dj_logout
 
 from core.models import *
-
+from core.forms import *
 ## TEMPLATE_CONTEXT_PROCESSORS
 
 def menus(request):
     return {'menus': Application.objects.all()}
 
 def getuser(request):
+    # print(request)
     return {'user': request.user}
+    try:
+        return {'user': request.user}
+    except:
+        return {'user': None}
 
 ## END TEMPLATE_CONTEXT_PROCESSORS
 
@@ -24,8 +29,14 @@ def index(request):
     c = {}
     return render_to_response("inicio.html", c, context_instance=RequestContext(request))
 
+def servermanager(request):
+    c = {}
+    frm = ServerForm()
+    c["serverForm"] = frm
+    return render_to_response("servermanager.html", c, context_instance=RequestContext(request))
 
 def login(request):
+    # print(request)
     c = {}
     if 'next' in request.GET.keys():
         c["next"] = request.GET["next"]

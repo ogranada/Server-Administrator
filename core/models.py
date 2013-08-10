@@ -1,18 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.utils.translation import ugettext as _
+
 # Create your models here.
 
 class Application(models.Model):
 
     class Meta:
         verbose_name_plural = "Applications"
+        ordering = ['position']
 
     name = models.CharField(max_length=100)
     description = models.TextField()
+    position = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return _(self.name)
 
 
 class MenuItem(models.Model):
@@ -26,7 +30,7 @@ class MenuItem(models.Model):
     application = models.ForeignKey(Application)
 
     def __str__(self):
-        return self.name
+        return _(self.name)
 
 class Server(models.Model):
 
@@ -39,7 +43,7 @@ class Server(models.Model):
     user = models.ForeignKey(User)
 
     def __str__(self):
-        return self.name
+        return _(self.name)
 
 
 

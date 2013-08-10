@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 {% load bootstrap_toolkit %}
 {% load url from future %}
-<html lang="en">
+{% load i18n %}
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <title>Server Administrator</title>
@@ -29,23 +30,24 @@
         <div class="container">
             <a class="brand" href="/">Server Administrator</a>
             <ul class="nav">
-              <li><a href="{% url 'home' %}" class="">Home</a></li>
+              <li><a href="{% url 'home' %}" class="">{% trans "Home" %}</a></li>
       {% if user.is_authenticated %}
         {% for app in menus %}
             {% if app.menuitem_set.all|length > 0 %}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.name }}<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle"
+                      data-toggle="dropdown">{% trans app.name %}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     {% for menuitem in app.menuitem_set.all %}
-                        <li><a href="{% url menuitem.app_path %}">{{ menuitem }}</a></li>
+                        <li><a href="{% url menuitem.app_path %}">{% trans menuitem.name %}</a></li>
                     {% endfor %}
                     </ul>
                 </li>
             {% endif %}
         {% endfor %}
-                <li><a href="{% url 'core.views.logout' %}">Logout</a></li>
+        <li><a href="{% url 'core.views.logout' %}">{% trans "Logout" %}</a></li>
               {% else %}
-                <li><a href="{% url 'core.views.login' %}">Login</a></li>
+              <li><a href="{% url 'core.views.login' %}">{% trans "Login" %}</a></li>
       {% endif %}
             </ul>
         </div>

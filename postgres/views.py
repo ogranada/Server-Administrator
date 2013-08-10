@@ -6,6 +6,8 @@ from django.template import RequestContext
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 
+from django.utils.translation import ugettext as _
+
 from core.utils import ajax_view
 from pg_utils import run_pgDump
 

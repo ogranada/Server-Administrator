@@ -1,31 +1,10 @@
 {% extends "base.html" %}
-
-
-{% block menu %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PostgreSQL<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'postgres.views.backup' %}">Make BackUp</a></li>
-                        <!--<li><a href="{#% url 'demo_app.views.demo_form'
-                          %#}?layout=horizontal">Horizontal</a></li>-->
-                        <!-- <li><a href="{#% url
-                          'demo_app.views.demo_form_inline'
-                          %#}?layout=inline">Inline</a></li>-->
-                        <!--<li><a href="{#% url
-                          'demo_app.views.demo_form_inline'
-                          %#}?layout=search">Search</a></li>-->
-                        <!--<li><a href="{#% url
-                          'demo_app.views.demo_form_with_template'
-                          %#}?layout=horizontal">Using template</a></li>-->
-                    </ul>
-                </li>
-
-{% endblock %}
-
+{% load i18n %}
 
 {% block content %}
 
-Este es el Asistente de Adimistraci&oacute;n de servidores.
+{% trans "This is the Server Management Wizard." %}
+
 
 {%endblock%}
 

@@ -1,18 +1,19 @@
 [
     {
-      "pk": 1, 
+      "pk": 2, 
       "model": "core.application", 
       "fields": {
         "name": "PostgreSQL", 
-        "description": "PostgreSQL DBMS application"
+        "description": "PostgreSQL DBMS application",
+        "position":"1"
       }
     },
     {
-      "pk": 1, 
+      "pk": 2, 
       "model": "core.menuitem", 
       "fields": {
         "app_path": "postgres.views.backup", 
-        "application": 1, 
+        "application": 2, 
         "name": "Backup", 
         "description": "PostgreSQL backups' manager"
       }

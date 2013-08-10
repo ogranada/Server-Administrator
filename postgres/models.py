@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from core.models import Server
 import datetime
 
+from django.utils.translation import ugettext as _
 
 class DataBase(models.Model):
 
@@ -10,7 +11,7 @@ class DataBase(models.Model):
         verbose_name_plural = "DataBase"
 
     server = models.ForeignKey(Server)
-    name = models.TextField(max_length=100)
+    name = models.TextField(_("name"), max_length=100)
     schema = models.TextField(max_length=50)
     username = models.TextField(max_length=50)
     password = models.TextField(max_length=100)

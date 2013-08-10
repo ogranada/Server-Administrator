@@ -1,6 +1,6 @@
 
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
 
 {{ state }}
@@ -9,11 +9,11 @@
             <input type="hidden" name="next" value="{{ next }}" />
              {% endif %}
              {% csrf_token %}
-            username:
+             {% trans "Username" %}:
                   <input type="text" name="username" value="{{ username}}" /><br />
-            password:
+                  {% trans "Password" %}:
                   <input type="password" name="password" value="" /><br />                               
-           <input type="submit" value="Log In" />
+                  <input type="submit" value="{% trans "Login" %} " />
      </form>  
 
 {%endblock%}

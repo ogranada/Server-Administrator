@@ -34,13 +34,13 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-#TIME_ZONE = 'America/Chicago'
-TIME_ZONE = 'America/Bogota'
+TIME_ZONE = 'America/Chicago'
+#TIME_ZONE = 'America/Bogota'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-#LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'es-co'
+LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'es-co'
 
 SITE_ID = 1
 
@@ -52,6 +52,13 @@ USE_I18N = True
 # calendars according to the current locale.
 USE_L10N = True
 
+LANGUAGES = (
+        ('en', 'English'),
+        ('es', 'Spanish'),
+        )
+LOCALE_PATHS = (
+            BASEPATH + os.sep + 'locale',
+            )
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
@@ -107,6 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
