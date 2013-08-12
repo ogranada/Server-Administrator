@@ -69,4 +69,9 @@ def restore_backup(request, num=-1):
         return {"response": 'incorrect value'}
 
 
+@login_required
+def databases(request):
+    c = {}
+    c['dbFrm'] = DatabaseForm()
+    return render_to_response('postgres/databases.html', c, context_instance=RequestContext(request))
 

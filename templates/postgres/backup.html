@@ -1,6 +1,5 @@
-
-
 {% extends "base.html" %}
+{% load i18n %}
 {% block extra_head %}
         <script>
           function loadBackUp(){
@@ -33,7 +32,7 @@
     		  	{% endfor %}
     		</select>
             <br/>
-            <input type="submit" value="Restore" name="button" onclick="loadBackUp()" class="btn" />
+            <input type="submit" value="{% trans "Restore" %}" name="button" onclick="loadBackUp()" class="btn" />
         <!--
           </form>-->
   </div>
@@ -52,7 +51,7 @@
   		<h4>Create Backup</h4>
         <form action="/pgbackup" method="post">{% csrf_token %}
             {{ backupForm.as_p }}
-            <input type="submit" value="Save" name="button" class="btn" />
+            <input type="submit" value="{% trans "Save" %}" name="button" class="btn" />
         </form>
   </div>
 </div>

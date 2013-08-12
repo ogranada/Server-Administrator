@@ -47,3 +47,7 @@ msgstr "Crear Servidor"
 msgid "Databases"
 msgstr "Bases de Datos"
 
+msgid "Restore"
+msgstr "Restaurar"
+
+

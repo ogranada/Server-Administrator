@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
     #################
     url(r'^pgbackup/?$', 'postgres.views.backup', name='PostgreSQL Backup'),
+    url(r'^databases/?$', 'postgres.views.databases', name='Bases de Datos'),
     url(r'^pgbackup/recover/(?P<num>\d+)/?$', 'postgres.views.restore_backup'),
     #################
     url(r'^$', 'core.views.index', name='home'),
