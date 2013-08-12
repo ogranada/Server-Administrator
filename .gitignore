@@ -11,3 +11,9 @@
 *.swp
 
 
+# translate compiled files #
+############################
+
+*.mo
+
+
