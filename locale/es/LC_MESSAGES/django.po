@@ -41,3 +41,6 @@ msgstr "Servidores"
 msgid "server"
 msgstr "servidor"
 
+msgid "Create Server"
+msgstr "Crear Servidor"
+

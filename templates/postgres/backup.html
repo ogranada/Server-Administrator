@@ -33,7 +33,7 @@
     		  	{% endfor %}
     		</select>
             <br/>
-            <input type="submit" value="Restore" name="button" onclick="loadBackUp()" />
+            <input type="submit" value="Restore" name="button" onclick="loadBackUp()" class="btn" />
         <!--
           </form>-->
   </div>
@@ -52,7 +52,7 @@
   		<h4>Create Backup</h4>
         <form action="/pgbackup" method="post">{% csrf_token %}
             {{ backupForm.as_p }}
-            <input type="submit" value="Save" name="button" />
+            <input type="submit" value="Save" name="button" class="btn" />
         </form>
   </div>
 </div>

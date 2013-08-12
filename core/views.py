@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as dj_login
 from django.contrib.auth import logout as dj_logout
 
+from core.utils import ajax_view
+from django.contrib.auth.decorators import login_required
+
 from core.models import *
 from core.forms import *
 ## TEMPLATE_CONTEXT_PROCESSORS
@@ -34,6 +37,21 @@ def servermanager(request):
     frm = ServerForm()
     c["serverForm"] = frm
     return render_to_response("servermanager.html", c, context_instance=RequestContext(request))
+
+@login_required
+@ajax_view
+def saveserver(request):
+    if request.is_ajax():
+        try:
+            o = Server()
+            o.host = request.GET['host']
+            o.name = request.GET['name']
+            o.description = request.GET['description']        
+            o.user = request.user
+            o.save()
+            return {'status':'Ok','message':'Server Saved'}
+        except Exception as e:
+            return {'status':'Fail','message':'Error Saving: ' + str(e)}
 
 def login(request):
     # print(request)

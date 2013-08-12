@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     #################
     url(r'^$', 'core.views.index', name='home'),
     url(r'^servermanager$', 'core.views.servermanager', name='Server Manager'),
+    url(r'^saveserver$', 'core.views.saveserver'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -37,8 +37,8 @@ class Server(models.Model):
     class Meta:
         verbose_name_plural = "Servers"
 
-    name = models.CharField(max_length=100)
-    host = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
+    host = models.CharField(max_length=100, unique=True, null=False)
     description = models.TextField()
     user = models.ForeignKey(User)
 

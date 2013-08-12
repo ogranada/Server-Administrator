@@ -2,12 +2,38 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block extra_head %}
+        <script type="text/javascript">
+    function saveServer() 
+    {
+      $.ajax({
+            url: '/saveserver', 
+            data:$('#frmsave').serialize(), 
+            success: function(response) {
+                if(response.response['status']=='Ok'){
+                    message = response.response['message'];
+                    $('#savestatus').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
+                    $("#frmsave input").val('');
+                    $("#frmsave textarea").val('');
+                } else if(response.response['status']=='Fail'){
+                    message = response.response['message'];
+                    $('#savestatus').html('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
+                }
+            }
+        });
+    }
+        </script>
+{% endblock %}
 {% block content %}
-
-        <form action="" method="post">{% csrf_token %}
-            {{ serverForm.as_p }}
-            <input type="submit" value="Save" name="button" />
-        </form>
-
+    <div class="row">
+        <h4>{% trans "Create Server" %}</h4>
+        <div class="span5">
+            <div id="savestatus"></div>
+            <form id="frmsave">{% csrf_token %}
+                {{ serverForm.as_p }}
+            </form>
+            <input type="submit" value="{% trans "Save" %}" name="button" class="btn" onclick="saveServer()" />
+        </div>
+    </div>
 {%endblock%}
 
