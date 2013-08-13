@@ -10,6 +10,18 @@ ADMINS = (
 MANAGERS = ADMINS
 import os
 BASEPATH = os.sep.join(os.path.abspath( __file__ ).split(os.sep)[0:-2] )
+opportunities = os.listdir(BASEPATH)
+
+APPS = []
+for op in opportunities:
+    try:
+        l = os.listdir(BASEPATH+os.sep+op)
+        if '__init__.py' in l and 'urls.py' in l and 'wsgi.py' not in l:
+            APPS.append(op)
+    except:
+        pass
+
+
 DATE_FORMAT = '%Y-%m-%d'
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 # FIXTURE_DIRS = (BASEPATH + os.sep + "fixtures",)

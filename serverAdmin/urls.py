@@ -9,30 +9,19 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'serverAdmin.views.home', name='home'),
     #url(r'^serverAdmin/', include('serverAdmin.foo.urls')),
-
-    url(r'^accounts/login/$', 'core.views.login', name='login'),
-    url(r'^accounts/logout/$', 'core.views.logout', name='logout'),
-
-    #################
-    url(r'^pgbackup/?$', 'postgres.views.backup', name='PostgreSQL Backup'),
-    url(r'^databases/?$', 'postgres.views.databases', name='Bases de Datos'),
-    url(r'^pgbackup/recover/(?P<num>\d+)/?$', 'postgres.views.restore_backup'),
-    url(r'^savedatabase/?$', 'postgres.views.savedatabase'),
-    url(r'^savebackup/?$', 'postgres.views.savebackup'),
-    #################
-    url(r'^$', 'core.views.index', name='home'),
-    url(r'^servermanager$', 'core.views.servermanager', name='Server Manager'),
-    url(r'^saveserver$', 'core.views.saveserver'),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
 
 
 urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    )
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+)
+
+for app in settings.APPS:
+    appurls = __import__(app+".urls",fromlist=['urls'])
+    urlpatterns += appurls.urlpatterns
+
+
+
 
