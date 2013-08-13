@@ -50,4 +50,7 @@ msgstr "Bases de Datos"
 msgid "Restore"
 msgstr "Restaurar"
 
+msgid "Servers List"
+msgstr "Lista de Servidores"
+
 

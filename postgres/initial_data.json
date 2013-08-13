@@ -17,5 +17,15 @@
         "name": "Backup", 
         "description": "PostgreSQL backups' manager"
       }
+    },
+    {
+      "pk": 3, 
+      "model": "core.menuitem", 
+      "fields": {
+        "app_path": "postgres.views.databases", 
+        "application": 2, 
+        "name": "Databases", 
+        "description": "Administrate Databases"
+      }
     }
 ]

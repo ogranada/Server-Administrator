@@ -1,11 +1,53 @@
 
 {% extends "base.html" %}
 {% load i18n %}
+
+
+{% block extra_head %}
+        <script type="text/javascript">
+    function saveDatabase() 
+    {
+      $.ajax({
+            url: '/savedatabase', 
+            data:$('#frmsave').serialize(), 
+            success: function(response) {
+                if(response.response['status']=='Ok'){
+                    message = response.response['message'];
+                    $('#savestatus').html('<div id="statusalert" class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
+                    $("#frmsave input").val('');
+                    $("#frmsave textarea").val('');
+                } else if(response.response['status']=='Fail'){
+                    message = response.response['message'];
+                    $('#savestatus').html('<div id="statusalert" class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
+                }
+                hideStatusAlert();
+            }
+        });
+    }
+        </script>
+{% endblock %}
+
 {% block content %}
+    <div class="row">
+        <div class="span5">
+            <div id="savestatus"></div>
+            <form id="frmsave">
+                {{ dbFrm.as_p }}
+            </form>
+            <input type="submit" value="{% trans "Save" %}" name="button" onclick="saveDatabase()" class="btn" />
+        </div>
 
-	<form>
-		{{ dbFrm.as_p }}
-	</form>
-    <input type="submit" value="{% trans "Save" %}" name="button" class="btn" />
 
+        <div class="span5">        
+            <h4>{% trans "Databases List" %}</h4>
+            <select>                
+            {% for db in user.database_set.all %}
+                <option >
+                    {{ db }}
+                </option>
+            {% endfor %}
+            </select>
+        </div>
+
+    </div>
 {% endblock %}

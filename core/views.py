@@ -32,27 +32,6 @@ def index(request):
     c = {}
     return render_to_response("inicio.html", c, context_instance=RequestContext(request))
 
-def servermanager(request):
-    c = {}
-    frm = ServerForm()
-    c["serverForm"] = frm
-    return render_to_response("servermanager.html", c, context_instance=RequestContext(request))
-
-@login_required
-@ajax_view
-def saveserver(request):
-    if request.is_ajax():
-        try:
-            o = Server()
-            o.host = request.GET['host']
-            o.name = request.GET['name']
-            o.description = request.GET['description']        
-            o.user = request.user
-            o.save()
-            return {'status':'Ok','message':'Server Saved'}
-        except Exception as e:
-            return {'status':'Fail','message':'Error Saving: ' + str(e)}
-
 def login(request):
     # print(request)
     c = {}
@@ -85,3 +64,26 @@ def logout(request):
     dj_logout(request)
     # c["user"] = request.user
     return redirect("/", c)
+
+@login_required
+@ajax_view
+def saveserver(request):
+    if request.is_ajax():
+        try:
+            o = Server()
+            o.host = request.GET['host']
+            o.name = request.GET['name']
+            o.description = request.GET['description']        
+            o.user = request.user
+            o.save()
+            return {'status':'Ok','message':'Server Saved'}
+        except Exception as e:
+            return {'status':'Fail','message':'Error Saving: ' + str(e)}
+
+
+@login_required
+def servermanager(request):
+    c = {}
+    frm = ServerForm()
+    c["serverForm"] = frm
+    return render_to_response("servermanager.html", c, context_instance=RequestContext(request))

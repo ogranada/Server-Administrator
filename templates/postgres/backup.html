@@ -16,26 +16,46 @@
                     }
                 });
               }
+
+          function saveBackup(){
+              $.ajax({
+                    url: '/savebackup', 
+                    data:$('#frmsave').serialize(),
+                    beforeSend : function(jqxhr){
+                      $("#savepgbar").html('Progress: <div class="progress progress-striped active"><div id="pgbarsave" class="bar" style="width: 10%;"></div></div>');
+                      window.timeout = setTimeout(function(){
+                        var pg = $('#pgbarsave').css("width");
+                        pg = parseInt( pg.replace('%','') )+20;
+                        pg += '%';
+                        $('#pgbarsave').css("width", pg);
+                      }, 1000);
+                    }, 
+                    success: function(response) {
+                        if(response.response['status']=='Ok'){
+                            message = response.response['message'];
+                            $('#savestatus').html('<div id="statusalert" class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
+                            $("#frmsave input").val('');
+                            $("#frmsave textarea").val('');
+                            $("#savepgbar").html('');
+                            $("#recoverbackup").html(response.response['objects']);
+                            clearTimeout(window.timeout);
+                        } else if(response.response['status']=='Fail'){
+                            message = response.response['message'];
+                            $('#savestatus').html('<div id="statusalert" class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
+                            $("#savepgbar").html('');
+                            clearTimeout(window.timeout);
+                        }
+                        hideStatusAlert();
+                    }
+                });
+              }
+
         </script>
 {% endblock %}
 {% block content %}
 
 <div class="row">
-  <div class="span5">
-    <!--
-    <form action="/pgbackup/" method="post">{% csrf_token %}-->
-      		<h4>My Backups</h4>
-            <label for="backups_id">Backup:</label>
-      		<select id="recoverbackup" name="recoverbackup">
-      			{% for back in user.backup_set.all %}
-    		  	<option value="{{ back.id }}">{{ back }}</option>
-    		  	{% endfor %}
-    		</select>
-            <br/>
-            <input type="submit" value="{% trans "Restore" %}" name="button" onclick="loadBackUp()" class="btn" />
-        <!--
-          </form>-->
-  </div>
+
   <div class="span5">
     {% if opresult and opresult == "err" %}
     <div class="alert alert-error">
@@ -49,11 +69,31 @@
     </div>
     {% endif %}
   		<h4>Create Backup</h4>
-        <form action="/pgbackup" method="post">{% csrf_token %}
+        <div id="savepgbar"></div>
+        <div id="savestatus"></div>
+        <form id="frmsave">{% csrf_token %}
             {{ backupForm.as_p }}
-            <input type="submit" value="{% trans "Save" %}" name="button" class="btn" />
         </form>
+        <input type="submit" value="{% trans "Save" %}" name="button" onclick="saveBackup()" class="btn" />
   </div>
+
+  
+  <div class="span5">
+    <!--
+    <form action="/pgbackup/" method="post">{% csrf_token %}-->
+          <h4>My Backups</h4>
+            <label for="backups_id">Backup:</label>
+          <select id="recoverbackup" name="recoverbackup">
+            {% for back in user.backup_set.all %}
+            <option value="{{ back.id }}">{{ back }}</option>
+            {% endfor %}
+        </select>
+            <br/>
+            <input type="submit" value="{% trans "Restore" %}" name="button" onclick="loadBackUp()" class="btn" />
+        <!--
+          </form>-->
+  </div>
+
 </div>
 
 {% endblock %}

@@ -18,7 +18,7 @@ class DataBase(models.Model):
     user = models.ForeignKey(User)
 
     def __str__(self):
-        return self.name + "[" + self.schema + "]"
+        return self.name + " [ " + self.schema + " ]"
 
 
 class Backup(models.Model):
