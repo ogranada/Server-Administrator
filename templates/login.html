@@ -2,20 +2,46 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
+<div class="row">
+<div class="offset3 span6">
+      {{ state }}
 
-{{ state }}
-    <form action="{% url 'core.views.login' %}" method="post">
+          <!-- Form Name -->
+          <legend>Login</legend>
+      <form class="form-horizontal" action="{% url 'core.views.login' %}" method="post" >
+        <fieldset>
+            
             {% if next %}
             <input type="hidden" name="next" value="{{ next }}" />
              {% endif %}
              {% csrf_token %}
-             {% trans "Username" %}:
-                  <input type="text" name="username" value="{{ username}}" /><br />
-                  {% trans "Password" %}:
-                  <input type="password" name="password" value="" /><br />                               
-                  <input type="submit" value="{% trans "Login" %}" class="btn" />
-     </form>  
 
+          <!-- Text input-->
+          <div class="control-group">
+              <label class="control-label" for="Username">Username</label>
+                <div class="controls">
+                      <input id="Username"  name="username" value="{{ username}}" type="text" placeholder="username" class="input-xlarge">
+                            </div>
+                          </div>
+
+                          <!-- Password input-->
+                          <div class="control-group">
+                              <label class="control-label" for="Password">password</label>
+                              <div class="controls">
+                                 <input id="Password" name="password" type="password" placeholder="password" class="input-xlarge">
+                              </div>
+                          </div>
+
+                          <!-- Button -->
+                          <div class="control-group">
+                              <div class="controls">
+                                <input type="submit" value="{% trans "Login" %}" class="btn btn-primary" />
+                              </div>
+                          </div>
+                     </fieldset>
+                   </form>
+</div>
+</div>
 {%endblock%}
 
 
