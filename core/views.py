@@ -76,7 +76,8 @@ def saveserver(request):
             o.description = request.GET['description']        
             o.user = request.user
             o.save()
-            return {'status':'Ok','message':'Server Saved'}
+            objs = ''.join(['<option value="%i">%s</option>'%(x.id,x.name) for x in Server.objects.all()])
+            return {'status':'Ok','message':'Server Saved','objects':objs}
         except Exception as e:
             return {'status':'Fail','message':'Error Saving: ' + str(e)}
 

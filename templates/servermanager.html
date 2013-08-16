@@ -15,6 +15,7 @@
                     $('#savestatus').html('<div id="statusalert" class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
                     $("#frmsave input").val('');
                     $("#frmsave textarea").val('');
+                    $("#serverlist").html(response.response['objects']);
                 } else if(response.response['status']=='Fail'){
                     message = response.response['message'];
                     $('#savestatus').html('<div id="statusalert" class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>'+message+'</div>');
@@ -38,7 +39,7 @@
 
         <div class="span5">        
             <h4>{% trans "Servers List" %}</h4>
-            <select>                
+            <select id="serverlist" name="serverlist">
             {% for server in user.server_set.all %}
                 <option >
                     {{ server }}

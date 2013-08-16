@@ -90,6 +90,7 @@ def savedatabase(request):
             db.password = request.GET['password']
             db.user = request.user
             db.save()
-            return {'status':'Ok','message':'Server Saved'}
+            objs = ''.join(['<option value="%i">%s</option>'%(x.id,str(x)) for x in DataBase.objects.all()])
+            return {'status':'Ok','message':'Server Saved','objects':objs}
         except Exception as e:
             return {'status':'Fail','message':'Error Saving: ' + str(e)}
