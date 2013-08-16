@@ -1,7 +1,7 @@
 DEPLOY
 ======
 
-This folder and content are based on [wsgi Django's documentation](https://uwsgi.readthedocs.org/en/latest/tutorials/Django_and_nginx.html).
+This folder and content are based on [uwsgi Django's documentation](https://uwsgi.readthedocs.org/en/latest/tutorials/Django_and_nginx.html).
 
 The serveradmin.conf file will be copied to /etc/nginx/sites-available:
 * copy serveradmin.conf /etc/nginx/sites-available/
