@@ -1,0 +1,6 @@
+Django==1.5.1
+argparse==1.2.1
+django-bootstrap-toolkit==2.15.0
+ipython==0.13.2
+uWSGI==1.9.14
+wsgiref==0.1.2
