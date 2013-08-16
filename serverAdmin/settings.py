@@ -21,6 +21,7 @@ for op in opportunities:
     except:
         pass
 
+
 DATE_FORMAT = '%Y-%m-%d'
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 # FIXTURE_DIRS = (BASEPATH + os.sep + "fixtures",)
@@ -168,6 +169,8 @@ INSTALLED_APPS = (
      #################################
     'bootstrap_toolkit',
      #################################
+    # 'core',
+    # 'postgres'
 ) + tuple(APPS)
 
 # A sample logging configuration. The only tangible logging
