@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.shortcuts import redirect
 from django.template import RequestContext
 from django.core.context_processors import csrf
@@ -30,7 +31,8 @@ def getuser(request):
 
 def index(request):
     c = {}
-    return render_to_response("inicio.html", c, context_instance=RequestContext(request))
+    # return render_to_response("inicio.html", c, context_instance=RequestContext(request))
+    return render(request, "inicio.html", c)
 
 def login(request):
     # print(request)
@@ -56,7 +58,8 @@ def login(request):
         else:
             state = "Your username and/or password were incorrect."
     c["state"] = state
-    return render_to_response("login.html", c, context_instance=RequestContext(request))
+    # return render_to_response("login.html", c, context_instance=RequestContext(request))
+    return render(request, "login.html", c)
 
 
 def logout(request):
@@ -87,4 +90,5 @@ def servermanager(request):
     c = {}
     frm = ServerForm()
     c["serverForm"] = frm
-    return render_to_response("servermanager.html", c, context_instance=RequestContext(request))
+    # return render_to_response("servermanager.html", c, context_instance=RequestContext(request))
+    return render(request, "servermanager.html", c, context_instance=RequestContext(request))

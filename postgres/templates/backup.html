@@ -2,6 +2,11 @@
 {% load i18n %}
 {% block extra_head %}
         <script>
+          function downloadBackUp(){
+            var bckpid = $('#recoverbackup').val();
+            nw = window.open('/pgbackup/download/'+bckpid,'_blank');
+          }
+
           function loadBackUp(){
             var bckpid = $('#recoverbackup').val();
               $.ajax('/pgbackup/recover/'+bckpid, {
@@ -90,6 +95,7 @@
         </select>
             <br/>
             <input type="submit" value="{% trans "Restore" %}" name="button" onclick="loadBackUp()" class="btn" />
+            <input type="submit" value="{% trans "Download" %}" name="btnDownload" onclick="downloadBackUp()" class="btn" />
         <!--
           </form>-->
   </div>

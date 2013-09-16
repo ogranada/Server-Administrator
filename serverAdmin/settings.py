@@ -68,9 +68,7 @@ LANGUAGES = (
         ('en', 'English'),
         ('es', 'Spanish'),
         )
-LOCALE_PATHS = (
-            BASEPATH + os.sep + 'locale',
-            )
+LOCALE_PATHS = tuple([os.sep.join([BASEPATH,x,'locale']) for x in APPS])
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
@@ -89,7 +87,7 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 # STATIC_ROOT = ''
-STATIC_ROOT = BASEPATH + os.sep + "static"
+STATIC_ROOT = '' #BASEPATH + os.sep + "static"
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"

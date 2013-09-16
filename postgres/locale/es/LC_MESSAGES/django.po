@@ -1,0 +1,56 @@
+
+#. Translators: This message appears on the home page only
+# path/to/python/file.py:123
+
+msgid "This is the Server Management Wizard."
+msgstr "Este es el Asistente de Administración de servidores."
+
+msgid "name"
+msgstr "nombre"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Schema"
+msgstr "Esquema"
+
+msgid "Administration"
+msgstr "Administración"
+
+msgid "Login"
+msgstr "Iniciar Sesión"
+
+msgid "Logout"
+msgstr "Terminar Sesión"
+
+msgid "Server Manager"
+msgstr "Administrador de Servidores"
+
+msgid "Backup"
+msgstr "Copia de Respaldo"
+
+msgid "Application"
+msgstr "Aplicación"
+
+msgid "Applications"
+msgstr "Aplicaciones"
+
+msgid "Servers"
+msgstr "Servidores"
+
+msgid "server"
+msgstr "servidor"
+
+msgid "Create Server"
+msgstr "Crear Servidor"
+
+msgid "Databases"
+msgstr "Bases de Datos"
+
+msgid "Restore"
+msgstr "Restaurar"
+
+msgid "Servers List"
+msgstr "Lista de Servidores"
+
+

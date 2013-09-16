@@ -28,6 +28,7 @@ class Backup(models.Model):
 
     date = models.DateTimeField(default=datetime.datetime.today())
     description = models.TextField(max_length=30)
+    filename = models.TextField(max_length=100)
     user = models.ForeignKey(User)
     database = models.ForeignKey(DataBase)
 

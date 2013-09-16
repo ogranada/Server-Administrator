@@ -3,9 +3,11 @@ import sys
 import os
 import pty
 import time
+import datetime
 import subprocess as sp
 
-
+from shutil import move
+from hashlib import md5
 
 import re
 import subprocess
@@ -20,7 +22,8 @@ def is_running(process):
                 return True
     return False
 
-def run_pgDump(outfile, hostname, db, user, passwd):
+def run_pgDump(hostname, db, user, passwd):
+    outfile = '.tmp.dump'
     ## pg_dump consumidores -U letmiapp_user -W -h localhost -f salida.dump
     pid, fd = pty.fork()
     if pid == pty.CHILD:
@@ -35,7 +38,10 @@ def run_pgDump(outfile, hostname, db, user, passwd):
             print('wait %i...'%(ctd))
             ctd += 1
         msj = os.read(fd, 1024)
-        return msj.strip()=='', msj
+        content = open(outfile).read()+str(datetime.datetime.now())
+        nm = md5(content).hexdigest()+'.dump'
+        move(outfile,os.sep.join(['postgres','media',nm]))
+        return msj.strip()=='', msj, nm
 
 
 if __name__ == '__main__':
